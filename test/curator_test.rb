@@ -141,4 +141,61 @@ class CuratorTest < Minitest::Test
     }
     assert_equal expected, curator.photographs_by_artist
   end
+
+  def test_it_can_find_artist_with_multiple_photographs
+    curator = Curator.new
+    photo1 = Photograph.new({
+       id: "1",
+       name: "Rue Mouffetard, Paris (Boy with Bottles)",
+       artist_id: "1",
+       year: "1954"
+    })
+    photo2 = Photograph.new({
+       id: "2",
+       name: "Moonrise, Hernandez",
+       artist_id: "2",
+       year: "1941"
+    })
+    photo3 = Photograph.new({
+       id: "3",
+       name: "Identical Twins, Roselle, New Jersey",
+       artist_id: "3",
+       year: "1967"
+    })
+    photo4 = Photograph.new({
+       id: "4",
+       name: "Monolith, The Face of Half Dome",
+       artist_id: "3",
+       year: "1927"
+    })
+    artist1 = Artist.new({
+       id: "1",
+       name: "Henri Cartier-Bresson",
+       born: "1908",
+       died: "2004",
+       country: "France"
+    })
+    artist2 = Artist.new({
+       id: "2",
+       name: "Ansel Adams",
+       born: "1902",
+       died: "1984",
+       country: "United States"
+    })
+    artist3 = Artist.new({
+       id: "3",
+       name: "Diane Arbus",
+       born: "1923",
+       died: "1971",
+       country: "United States"
+    })
+    curator.add_artist(artist1)
+    curator.add_artist(artist2)
+    curator.add_artist(artist3)
+    curator.add_photograph(photo1)
+    curator.add_photograph(photo2)
+    curator.add_photograph(photo3)
+    curator.add_photograph(photo4)
+    assert_equal ["Diane Arbus"], curator.artists_with_multiple_photographs
+  end
 end
