@@ -79,4 +79,13 @@ class Curator
     between.flatten
   end
 
+  def artists_photographs_by_age(artist)
+    photographs = photographs_by_artist[artist]
+    age_when_taken = {}
+    photographs.each do |photo|
+      age_when_taken[photo.year.to_i - artist.born.to_i] = photo.name
+    end
+    age_when_taken
+  end
+
 end
