@@ -1,5 +1,6 @@
 require './lib/artist'
 require './lib/photograph'
+require 'csv'
 require 'pry'
 class Curator
 
@@ -53,4 +54,13 @@ class Curator
     end
     photos.flatten
   end
+
+  def load_photographs(file_path)
+    CSV.foreach(file_path, headers: true) do |row|
+      photo = Photograph.new({:id => row['id'],:name=> row['name'],
+        :artist_id=> row['artist_id'],:year=> row['year']})
+      add_photograph(photo)
+    end
+  end
+  
 end
