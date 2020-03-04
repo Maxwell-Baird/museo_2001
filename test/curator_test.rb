@@ -14,6 +14,6 @@ class CuratorTest < Minitest::Test
   def test_it_has_attributes
     curator = Curator.new
     assert_equal [], curator.photographs
-    assert_equal [], curator.artist
+    assert_equal [], curator.artists
   end
 end
