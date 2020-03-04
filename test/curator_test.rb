@@ -266,4 +266,15 @@ class CuratorTest < Minitest::Test
     assert_equal "1", curator.photographs.first.artist_id
     assert_equal "1954", curator.photographs.first.year
   end
+
+  def test_it_can_load_artists
+    curator = Curator.new
+    curator.load_artists('./data/artists.csv')
+    assert_equal 6, curator.artists.length
+    assert_equal '1', curator.artists.first.id
+    assert_equal 'Henri Cartier-Bresson', curator.artists.first.name
+    assert_equal '1908', curator.artists.first.born
+    assert_equal '2004', curator.artists.first.died
+    assert_equal 'France', curator.artists.first.country
+  end
 end
