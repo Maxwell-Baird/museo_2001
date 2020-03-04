@@ -277,4 +277,23 @@ class CuratorTest < Minitest::Test
     assert_equal '2004', curator.artists.first.died
     assert_equal 'France', curator.artists.first.country
   end
+
+  def test_it_can_find_photographs_taken_between
+    curator = Curator.new
+    curator.load_artists('./data/artists.csv')
+    curator.load_photographs('./data/photographs.csv')
+    photo1 = Photograph.new({
+      id: '1',
+      name: "Rue Mouffetard, Paris (Boy with Bottles)",
+      artist_id: "1",
+      year: '1954'
+      })
+    photo2 =Photograph.new({
+      id: '4',
+      name: "Child with Toy Hand Grenade in Central Park",
+      artist_id: '3',
+      year: '1962'
+      })
+    assert_equal [photo1, photo2], curator.photographs_taken_between(1950..1965)
+  end
 end
