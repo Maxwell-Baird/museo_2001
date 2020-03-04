@@ -3,7 +3,6 @@ require "minitest/pride"
 require './lib/curator'
 require './lib/photograph'
 require './lib/artist'
-require 'pry'
 
 class CuratorTest < Minitest::Test
 

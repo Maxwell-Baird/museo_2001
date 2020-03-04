@@ -1,7 +1,7 @@
 require './lib/artist'
 require './lib/photograph'
 require 'csv'
-require 'pry'
+
 class Curator
 
   attr_reader :photographs, :artists
