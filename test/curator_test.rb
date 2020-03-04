@@ -3,6 +3,7 @@ require "minitest/pride"
 require './lib/curator'
 require './lib/photograph'
 require './lib/artist'
+require 'pry'
 
 class CuratorTest < Minitest::Test
 
@@ -282,18 +283,8 @@ class CuratorTest < Minitest::Test
     curator = Curator.new
     curator.load_artists('./data/artists.csv')
     curator.load_photographs('./data/photographs.csv')
-    photo1 = Photograph.new({
-      id: '1',
-      name: "Rue Mouffetard, Paris (Boy with Bottles)",
-      artist_id: "1",
-      year: '1954'
-      })
-    photo2 =Photograph.new({
-      id: '4',
-      name: "Child with Toy Hand Grenade in Central Park",
-      artist_id: '3',
-      year: '1962'
-      })
-    assert_equal [photo1, photo2], curator.photographs_taken_between(1950..1965)
+    assert_equal 2, curator.photographs_taken_between(1950..1965).length
+    assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", curator.photographs_taken_between(1950..1965).first.name
+    assert_equal "Child with Toy Hand Grenade in Central Park", curator.photographs_taken_between(1950..1965).last.name
   end
 end
